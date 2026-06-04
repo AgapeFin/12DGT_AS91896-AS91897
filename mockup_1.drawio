@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="Zj3TjkvCmxaP8Rlrf547" name="Page-1">
-        <mxGraphModel dx="2072" dy="1111" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="2194" dy="1222" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -36,13 +36,6 @@
                 </mxCell>
                 <mxCell id="117" value="Add Popup Homework Window" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.window;align=left;verticalAlign=top;spacingLeft=8;strokeColor2=#008cff;strokeColor3=#c4c4c4;fontColor=#666666;mainText=;fontSize=17;labelBackgroundColor=none;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="-225" y="530" width="425" height="350" as="geometry"/>
-                </mxCell>
-                <mxCell id="118" style="edgeStyle=none;html=1;entryX=0.472;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="113" target="117" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="230" y="480"/>
-                        </Array>
-                    </mxGeometry>
                 </mxCell>
                 <mxCell id="119" value="Add Homework" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="1" vertex="1">
                     <mxGeometry x="-62.5" y="570" width="100" height="40" as="geometry"/>
@@ -163,13 +156,6 @@
                 </mxCell>
                 <mxCell id="257" value="Exit" style="rounded=1;html=1;shadow=0;dashed=0;whiteSpace=wrap;fontSize=10;fillColor=#dae8fc;align=center;strokeColor=#6c8ebf;" parent="1" vertex="1">
                     <mxGeometry x="655.5" y="810" width="105.5" height="33.76" as="geometry"/>
-                </mxCell>
-                <mxCell id="258" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.535;entryY=0.011;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="112" target="128" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="560" y="470"/>
-                        </Array>
-                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>
