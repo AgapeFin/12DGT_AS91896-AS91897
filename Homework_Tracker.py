@@ -70,7 +70,7 @@ def show_homework():
     clear_content()
 
     tk.Label(content_frame, text="Homework", font=("Arial", 20, "bold")).pack(pady=15)
-    ## Homework page will be shown here using a treeview wwidget.
+    ## Homework page will be shown here using a treeview widget.
     tree = ttk.Treeview(content_frame, columns=("Subject", "Task", "Due Date", "Priority", "Status"), show="headings")
 
     headings = ["Subject", "Task", "Due Date", "Priority", "Status"]
@@ -176,7 +176,7 @@ title = tk.Label(header,text="HOMEWORK PLANNER", font=("Arial", 18, "bold")) #Ma
 
 title.pack(pady=10)
 
-navbar = tk.Frame(root, bg="#dddddd") # The main navigation bar to navigate between pages.
+navbar = tk.Frame(root, bg="#FFFFFF") # The main navigation bar to navigate between pages.
 navbar.pack(fill="x")
 
 # Buttons labels in navigation bar
@@ -188,6 +188,17 @@ for text, command in buttons:
 
 content_frame = tk.Frame(root) ## the "content_frame" is the main page area so that the function clear_content() can remove
 content_frame.pack(fill="both", expand=True)
+
+
+def update_colour_coding(): ## unfinished color coding function
+    green_count = sum(1 for task in homework_data if task["priority"] == "Low" and task["status"] == "Incomplete")
+    red_count = sum(1 for task in homework_data if task["priority"] == "High" and task["status"] == "Incomplete")
+    yellow_count = sum(1 for task in homework_data if task["priority"] == "Medium" and task["status"] == "Incomplete")
+
+    green_label.config(text=f"Low Priority: {green_count}")
+    red_label.config(text=f"High Priority: {red_count}")
+    yellow_label.config(text=f"Medium Priority: {yellow_count}")
+
 
 ## unfinished colour coding
 green_label =tk.Label(root, text=".", fg="green", font=("Arial", 20))
