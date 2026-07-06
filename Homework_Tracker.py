@@ -10,6 +10,9 @@ DATA_FILE = "homework.json"
 # this list keeps all the homework tasks (while the app is still on)
 homework_data = []
 
+COLOUR_PRIORITY = {"Higher_Priority": "#ff0000", "Medium_Priority": "#ffff00", "Lower_Priority": "#00ff26" }
+
+
 def load_data(): ## Loads saved homework tasks from the JSON file and puts in homework_data
     global homework_data
 
@@ -49,6 +52,7 @@ def show_dashboard(): ## just shows the main dashboard page
             completed_count += 1
         else:
             upcoming_list.insert(tk.END, f"{task['subject']} - {task['task']} ({task['due_date']})")
+            colour = COLOUR_PRIORITY.get()
 
     tk.Label(content_frame, text="Completed Tasks", font=("Arial", 14, "bold")).pack(anchor="w", padx=20, pady=(10, 0))
 
@@ -189,27 +193,6 @@ for text, command in buttons:
 content_frame = tk.Frame(root) ## the "content_frame" is the main page area so that the function clear_content() can remove
 content_frame.pack(fill="both", expand=True)
 
-
-def update_colour_coding(): ## unfinished color coding function
-    green_count = sum(1 for task in homework_data if task["priority"] == "Low" and task["status"] == "Incomplete")
-    red_count = sum(1 for task in homework_data if task["priority"] == "High" and task["status"] == "Incomplete")
-    yellow_count = sum(1 for task in homework_data if task["priority"] == "Medium" and task["status"] == "Incomplete")
-
-    green_label.config(text=f"Low Priority: {green_count}")
-    red_label.config(text=f"High Priority: {red_count}")
-    yellow_label.config(text=f"Medium Priority: {yellow_count}")
-
-
-## unfinished colour coding
-green_label =tk.Label(root, text=".", fg="green", font=("Arial", 20))
-
-red_label =tk.Label(root, text=".", fg="red", font=("Arial", 20))
-
-yellow_label =tk.Label(root, text=".", fg="yellow", font=("Arial", 20))
-
-green_label.pack(side="left", padx=10, pady=5)
-red_label.pack(side="left", padx=10, pady=5)
-yellow_label.pack(side="left", padx=10, pady=5)
 
 show_dashboard()
 
