@@ -10,8 +10,9 @@ DATA_FILE = "homework.json"
 # this list keeps all the homework tasks (while the app is still on)
 homework_data = []
 
-COLOUR_PRIORITY = {"Higher_Priority": "#ff0000", "Medium_Priority": "#ffff00", "Lower_Priority": "#00ff26" }
+COLOUR_PRIORITY = {"Higher_Priority": "#d000ff", "Medium_Priority": "#ff006f", "Lower_Priority": "#ff8400" }
 
+COLOUR_STATUS = {"Complete":"#5988FF", "Incomplete":"#FF0000"}
 
 def load_data(): ## Loads saved homework tasks from the JSON file and puts in homework_data
     global homework_data
@@ -52,7 +53,8 @@ def show_dashboard(): ## just shows the main dashboard page
             completed_count += 1
         else:
             upcoming_list.insert(tk.END, f"{task['subject']} - {task['task']} ({task['due_date']})")
-            colour = COLOUR_PRIORITY.get()
+            colour = COLOUR_PRIORITY.get(task["priority"], "#FFFFFF")
+            upcoming_list.itemconfig(tk.END, bg=colour)
 
     tk.Label(content_frame, text="Completed Tasks", font=("Arial", 14, "bold")).pack(anchor="w", padx=20, pady=(10, 0))
 
@@ -64,11 +66,16 @@ def show_dashboard(): ## just shows the main dashboard page
 
         if task["status"] =="Complete":
             completed_list.insert(tk.END, f"✓ {task['subject']} - {task['task']}")
+            completed_list.itemconfig(tk.END, bg=COLOUR_STATUS["Complete"])
 
     ## Shows a summary of the total tasks and completed tasks
     summary = tk.Label(content_frame, text=f"Total Tasks: {len(homework_data)}    Completed: {completed_count}", font=("Arial", 12))
     summary.pack(pady=20)
 # ------
+
+
+
+
 def show_homework():
     ## This function will show the homework paege shown as a table
     clear_content()
