@@ -144,7 +144,13 @@ def show_homework():
 
     tree.pack(fill="both", expand=True, padx=20, pady=10)
 
+    button_row = tk.Frame(content_frame)
+    button_row.pack(pady=10)
 
+    tk.Button(button_row, text="Edit", command=lambda: edit_index(tree)).pack(side="left", padx=5)
+    tk.Button(button_row, text="Delete", command=lambda: delete_index(tree)).pack(side="left, padx=5")
+    tk.Button(button_row, text="Toggle Complete", command=lambda: complete_toggle(tree)).pack(side="left", padx=5)
+    
 
 ## for each task added, a row will be added in the table here
     for task in homework_data:
