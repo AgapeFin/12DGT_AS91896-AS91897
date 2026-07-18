@@ -79,7 +79,10 @@ def get_selected_index(tree): # finds home data inxex the selected task in the t
         return None
     return int(selection[0]) # uses the homeork data index as an id
 
-
+def edit_index(tree):
+    selection = tree.selection()
+    if not selection:
+        messagebox.showerror("Error", "Please select a task to edit.")
 
 
 def show_homework():
