@@ -81,8 +81,29 @@ def get_selected_index(tree): # finds home data inxex the selected task in the t
 
 def edit_index(tree):
     selection = tree.selection()
-    if not selection:
-        messagebox.showerror("Error", "Please select a task to edit.")
+    index = get_selected_index(tree)
+    if index is None:
+        return
+    show_add_task(edit_index=index) # Opens the addd/edit form already with the data of selected task.
+
+
+def delete_index(tree):
+    index = get_selected_index(tree)
+    if index is None:
+        return
+    confirm = messagebox.askyesno("Confirm Delete", "Are you sure you want to delete this task?")
+    if not confirm:
+        return
+    
+    homework_data.pop(index) # removes the task from homework_data
+    save_data() # saves the updated homework_data to the JSON file
+    show_homework()
+    messagebox.showinfo("Deleted", "Task has been deleted successfully.")
+
+
+    
+
+
 
 
 def show_homework():
