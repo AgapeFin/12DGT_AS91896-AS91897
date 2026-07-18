@@ -137,6 +137,15 @@ def show_homework():
         tree.tag_configure(priority, background=colour)
     tree.tag_configure("Complete", background=COLOUR_STATUS["Complete"])
 
+    for index, task in enumerate(homework_data): # Add each task to the treeview with right colours
+        # Completed tasks will be blue, if not then will be basaed on priority level
+        tag = "Complete" if task["status"] == "Complete" else task["priority"]
+        tree.insert("", tk.END, iid=str(index), values=(task["subject"], task["task"], task["due_date"], task["priority"], task["statis"]), tags=(tag,),)
+
+    tree.pack(fill="both", expand=True, padx=20, pady=10)
+
+
+
 ## for each task added, a row will be added in the table here
     for task in homework_data:
 
