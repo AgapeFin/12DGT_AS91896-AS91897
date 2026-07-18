@@ -100,6 +100,18 @@ def delete_index(tree):
     show_homework()
     messagebox.showinfo("Deleted", "Task has been deleted successfully.")
 
+def complete_toggle(tree):
+    index = get_selected_index(tree)
+    if index is None:
+        return
+    task = homework_data[index]
+    if task["status"] == "Complete":
+        task["status"] = "Incomplete"
+    else:
+        task["status"] = "Complete"
+    save_data()
+    show_homework()
+
 
     
 
@@ -120,6 +132,10 @@ def show_homework():
     for heading in headings:
         tree.heading(heading, text=heading)
         tree.column(heading, width=120)
+
+    for priority, colour in COLOUR_PRIORITY.items(): # Create colour for each priorty level for rows
+        tree.tag_configure(priority, background=colour)
+    tree.tag_configure("Complete", background=COLOUR_STATUS["Complete"])
 
 ## for each task added, a row will be added in the table here
     for task in homework_data:
