@@ -14,7 +14,7 @@ COLOUR_PRIORITY = {"Higher_Priority": "#d000ff", "Medium_Priority": "#ff006f", "
 
 COLOUR_STATUS = {"Complete":"#5988FF", "Incomplete":"#FF0000"}
 
-def load_data(): ## Loads saved homework tasks from the JSON file and puts in homework_data
+def load_data(): ## Loads saved homework tasks from the JSON file and puts in homework_data*
     global homework_data
 
     if os.path.exists(DATA_FILE):
@@ -72,6 +72,12 @@ def show_dashboard(): ## just shows the main dashboard page
     summary = tk.Label(content_frame, text=f"Total Tasks: {len(homework_data)}    Completed: {completed_count}", font=("Arial", 12))
     summary.pack(pady=20)
 # ------
+def get_selected_index(tree): # finds home data inxex the selected task in the treeview widget
+    selection = tree.selection()
+    if not selection:
+        messagebox.showerror("error", "please Select a task first")
+        return None
+    return int(selection[0]) # uses the homeork data index as an id
 
 
 
