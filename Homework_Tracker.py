@@ -79,7 +79,7 @@ def get_selected_index(tree): # finds home data inxex the selected task in the t
         return None
     return int(selection[0]) # uses the homeork data index as an id
 
-def edit_index(tree):
+def edit_selected_index(tree):
     selection = tree.selection()
     index = get_selected_index(tree)
     if index is None:
@@ -146,77 +146,77 @@ def show_homework():
 
     button_row = tk.Frame(content_frame)
     button_row.pack(pady=10)
-
-    tk.Button(button_row, text="Edit", command=lambda: edit_index(tree)).pack(side="left", padx=5)
+    #buttons for edit delete and toggle complete task
+    tk.Button(button_row, text="Edit", command=lambda: edit_selected_index(tree)).pack(side="left", padx=5)
     tk.Button(button_row, text="Delete", command=lambda: delete_index(tree)).pack(side="left, padx=5")
     tk.Button(button_row, text="Toggle Complete", command=lambda: complete_toggle(tree)).pack(side="left", padx=5)
-    
 
-## for each task added, a row will be added in the table here
-    for task in homework_data:
+subject_box = None
+task_box = None
+due_box = None
+priority_box = None
 
-        tree.insert("", tk.END, values=(task["subject"], task["task"], task["due_date"], task["priority"], task["status"]))
+def add_homework():
+    if(subject_box.get() == "" or task_box.get() or due_box.get() == "" or priority_box.get() == ""):
+        messagebox.showerror("erorr", "Please complete all fields.")
+        return
 
-    tree.pack(fill="both", expand=True, padx=20, pady=10)
+    new_task = {"subject": subject_box.et(), "task": task_box.get(), "due_date": due_box.get(), "priority": priority_box.get(), "status": "Incomplete",}
 
- ## This function will show the add HOMEWORK PAGE ---------------------------
-def show_add_task():
+    if edit_selected_index is None:
+        homework_data.append(new_task)
+        messagebox.showinfo("success", "Homework added")
+    else:
+        new_task["status"] = homework_data[editing_index]["status"]
+        homework_data[editing_index] = new_task
+        messagebox.showinfo("success", "Homework updated")
+    save_data()
+    show_dashboard()
 
+def show_add_task(edit_index=None):
+    global subject_box, task_box, due_box, priority_box, editing_index
+    editing_index = edit_index
     clear_content()
 
-    tk.Label(
-        content_frame,
-        text="Add Homework",
-        font=("Arial", 20, "bold")
-    ).pack(pady=20)
+    if edit_index is not None:
+        page_title = "Edit Homework"
+    else:
+        page_title = "Add Homework"
 
-    ## frame widget to just placehold the text boxes
-    form = tk.Frame(content_frame)
+    tk.Label(content_frame, text=page_title, font=("Arial", 20, "bold")).pack(pady=20)
+
+    form = tk.Frame(content_frame) # just a frame widget that placeholds the textboxes
     form.pack()
 
-    # frame widget - subject
     tk.Label(form, text="Subject").grid(row=0, column=0, pady=5)
+    subject_box = ttk.Combobox(form, values=["Maths", "English", "Science", "History", "PE", "Other"])
+    subject_box.grid(row=0, column=1)
 
-    subject = ttk.Combobox(form, values=["Maths", "English","Science","History","PE", "Other"])
+    tk.Label(form, text="task").grid(row=0, column=0, pady=5)
+    task_box = tk.Entry(form, width=30)
+    task_box.grid(row=1, column=1)
 
-    subject.grid(row=0, column=1)
+    tk.Label(form, text="Due date").grid(row=0, column=0, pady=5)
+    due_box = tk.Entry(form, width=30)
+    due_box.grid(row=2, column=1)
 
-    # frame widget - task
-    tk.Label(form, text="Task").grid(row=1, column=0, pady=5)
+    tk.Label(form, text="Priority").grid(row=0, column=0, pady=5)
+    priority_box = ttk.Combobox(form, values=["High", "Medium", "low"])
+    priority_box.grid(row=3, column=1)
 
-    task_entry = tk.Entry(form, width=30)
-    task_entry.grid(row=1, column=1)
+    if editing_index is not None:
+        task = homework_data[edit_index]
+        subject_box.set(task["subject"])
+        task_box.insert(0, task["task"])
+        due_box.insert(0, task["due_date"])
+        priority_box.set(task["priority"])
 
-    # frame widget - due date
-    tk.Label(form, text="Due Date").grid(row=2, column=0, pady=5)
+    if edit_index is not None:
+        button_text = "update Homework"
+    else:
+        button_text = "Save Homrwork"
 
-    due_entry = tk.Entry(form, width=30)
-    due_entry.grid(row=2, column=1)
-
-    # frame widget - priority
-    tk.Label(form, text="Priority").grid(row=3, column=0, pady=5)
-
-    priority = ttk.Combobox(form, values=["High", "Medium", "Low"])
-
-    priority.grid(row=3, column=1)
-
-    ## function that will be used when the save homework button is pressed
-    def add_homework():
-
-        # this makes sure nothing is left blank
-        if (subject.get() =="" or task_entry.get() =="" or due_entry.get() =="" or priority.get() ==""):
-            messagebox.showerror("Error", "Please complete all fields.")
-            return
-        ## when a new task is added, it will be added to the homework_data
-        homework_data.append({"subject": subject.get(), "task": task_entry.get(), "due_date": due_entry.get(), "priority": priority.get(), "status": "Incomplete"})
-
-        save_data() # then saves to JSON file
-
-        messagebox.showinfo("Success", "Homework Added!") ## Pop up message (happens after append)
-
-        show_dashboard() ## return to dashboard
-
-    tk.Button(content_frame, text="Save Homework", command=add_homework).pack(pady=20) ## the button that will  save the homework using the command
+    tk.Button(content_frame, text=button_text, command=add_homework).pack(pady=20)
 
 
 # shows the statistics page (placeholder for now)
