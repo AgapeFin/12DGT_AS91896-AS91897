@@ -14,6 +14,14 @@ COLOUR_PRIORITY = {"High": "#d000ff", "Medium": "#ff006f", "Low": "#ff8400"}
 
 COLOUR_STATUS = {"Complete":"#5988FF", "Incomplete":"#FF0000"}
 
+# stops a task/due date field from breaking the layout with huge input
+MAX_FIELD_LENGTH = 40
+
+
+def limit_length(new_value):
+    ## Tkinter calls this on every keystroke; returning False blocks the edit
+    return len(new_value) <= MAX_FIELD_LENGTH
+
 def load_data(): ## Loads saved homework tasks from the JSON file and puts in homework_data*
     global homework_data
 
@@ -191,12 +199,15 @@ def show_add_task(edit_index=None):
     subject_box = ttk.Combobox(form, values=["Maths", "English", "Science", "History", "PE", "Other"])
     subject_box.grid(row=0, column=1)
 
+    # %P passes Tkinter the proposed new text so limit_length can check it
+    vcmd = (root.register(limit_length), "%P")
+
     tk.Label(form, text="task").grid(row=1, column=0, pady=5)
-    task_box = tk.Entry(form, width=30)
+    task_box = tk.Entry(form, width=30, validate="key", validatecommand=vcmd)
     task_box.grid(row=1, column=1)
 
     tk.Label(form, text="Due date").grid(row=2, column=0, pady=5)
-    due_box = tk.Entry(form, width=30)
+    due_box = tk.Entry(form, width=30, validate="key", validatecommand=vcmd)
     due_box.grid(row=2, column=1)
 
     tk.Label(form, text="Priority").grid(row=3, column=0, pady=5)
