@@ -10,7 +10,7 @@ DATA_FILE = "homework.json"
 # this list keeps all the homework tasks (while the app is still on)
 homework_data = []
 
-COLOUR_PRIORITY = {"Higher_Priority": "#d000ff", "Medium_Priority": "#ff006f", "Lower_Priority": "#ff8400" }
+COLOUR_PRIORITY = {"High": "#d000ff", "Medium": "#ff006f", "Low": "#ff8400"}
 
 COLOUR_STATUS = {"Complete":"#5988FF", "Incomplete":"#FF0000"}
 
@@ -80,7 +80,6 @@ def get_selected_index(tree): # finds home data inxex the selected task in the t
     return int(selection[0]) # uses the homeork data index as an id
 
 def edit_selected_index(tree):
-    selection = tree.selection()
     index = get_selected_index(tree)
     if index is None:
         return
@@ -140,7 +139,7 @@ def show_homework():
     for index, task in enumerate(homework_data): # Add each task to the treeview with right colours
         # Completed tasks will be blue, if not then will be basaed on priority level
         tag = "Complete" if task["status"] == "Complete" else task["priority"]
-        tree.insert("", tk.END, iid=str(index), values=(task["subject"], task["task"], task["due_date"], task["priority"], task["statis"]), tags=(tag,),)
+        tree.insert("", tk.END, iid=str(index), values=(task["subject"], task["task"], task["due_date"], task["priority"], task["status"]), tags=(tag,),)
 
     tree.pack(fill="both", expand=True, padx=20, pady=10)
 
@@ -148,7 +147,7 @@ def show_homework():
     button_row.pack(pady=10)
     #buttons for edit delete and toggle complete task
     tk.Button(button_row, text="Edit", command=lambda: edit_selected_index(tree)).pack(side="left", padx=5)
-    tk.Button(button_row, text="Delete", command=lambda: delete_index(tree)).pack(side="left, padx=5")
+    tk.Button(button_row, text="Delete", command=lambda: delete_index(tree)).pack(side="left", padx=5)
     tk.Button(button_row, text="Toggle Complete", command=lambda: complete_toggle(tree)).pack(side="left", padx=5)
 
 subject_box = None
@@ -157,13 +156,13 @@ due_box = None
 priority_box = None
 
 def add_homework():
-    if(subject_box.get() == "" or task_box.get() or due_box.get() == "" or priority_box.get() == ""):
+    if(subject_box.get() == "" or task_box.get() == "" or due_box.get() == "" or priority_box.get() == ""):
         messagebox.showerror("erorr", "Please complete all fields.")
         return
 
-    new_task = {"subject": subject_box.et(), "task": task_box.get(), "due_date": due_box.get(), "priority": priority_box.get(), "status": "Incomplete",}
+    new_task = {"subject": subject_box.get(), "task": task_box.get(), "due_date": due_box.get(), "priority": priority_box.get(), "status": "Incomplete",}
 
-    if edit_selected_index is None:
+    if editing_index is None:
         homework_data.append(new_task)
         messagebox.showinfo("success", "Homework added")
     else:
@@ -192,16 +191,16 @@ def show_add_task(edit_index=None):
     subject_box = ttk.Combobox(form, values=["Maths", "English", "Science", "History", "PE", "Other"])
     subject_box.grid(row=0, column=1)
 
-    tk.Label(form, text="task").grid(row=0, column=0, pady=5)
+    tk.Label(form, text="task").grid(row=1, column=0, pady=5)
     task_box = tk.Entry(form, width=30)
     task_box.grid(row=1, column=1)
 
-    tk.Label(form, text="Due date").grid(row=0, column=0, pady=5)
+    tk.Label(form, text="Due date").grid(row=2, column=0, pady=5)
     due_box = tk.Entry(form, width=30)
     due_box.grid(row=2, column=1)
 
-    tk.Label(form, text="Priority").grid(row=0, column=0, pady=5)
-    priority_box = ttk.Combobox(form, values=["High", "Medium", "low"])
+    tk.Label(form, text="Priority").grid(row=3, column=0, pady=5)
+    priority_box = ttk.Combobox(form, values=["High", "Medium", "Low"])
     priority_box.grid(row=3, column=1)
 
     if editing_index is not None:
