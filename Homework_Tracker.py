@@ -235,7 +235,9 @@ def show_help():
 
     clear_content()
 
-    ttk.Label(content_frame, text="Help Page", font=("Arial", 18)).pack(pady=50)
+    ttk.Label(content_frame, text="Help Page", font=("Arial", 20, "bold")).pack(pady=20)
+
+    help_text = ("Dashboard - shows some upcoming tasks and completed tasks\n\n")
 
 
 # Main Window (Everything below this line will run once when program start) --------------------
