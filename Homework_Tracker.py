@@ -44,10 +44,10 @@ def show_dashboard(): ## just shows the main dashboard page
 
     clear_content()
     #shows the main welcome message and upcoming tasks
-    title = tk.Label(content_frame, text="Welcome Back!", font=("Arial", 20, "bold"))
+    title = ttk.Label(content_frame, text="Welcome Back!", font=("Arial", 20, "bold"))
     title.pack(pady=15)
 
-    tk.Label(content_frame, text="Upcoming Tasks", font=("Arial", 14, "bold")).pack(anchor="w", padx=20)
+    ttk.Label(content_frame, text="Upcoming Tasks", font=("Arial", 14, "bold")).pack(anchor="w", padx=20)
 
     # shows the tasks in a listbox
     upcoming_list = tk.Listbox(content_frame, width=70, height=8)
@@ -65,7 +65,7 @@ def show_dashboard(): ## just shows the main dashboard page
             colour = COLOUR_PRIORITY.get(task["priority"], "#FFFFFF")
             upcoming_list.itemconfig(tk.END, bg=colour)
 
-    tk.Label(content_frame, text="Completed Tasks", font=("Arial", 14, "bold")).pack(anchor="w", padx=20, pady=(10, 0))
+    ttk.Label(content_frame, text="Completed Tasks", font=("Arial", 14, "bold")).pack(anchor="w", padx=20, pady=(10, 0))
 
     completed_list = tk.Listbox(content_frame, width=70, height=5)
     completed_list.pack(padx=20)
@@ -78,7 +78,7 @@ def show_dashboard(): ## just shows the main dashboard page
             completed_list.itemconfig(tk.END, bg=COLOUR_STATUS["Complete"])
 
     ## Shows a summary of the total tasks and completed tasks
-    summary = tk.Label(content_frame, text=f"Total Tasks: {len(homework_data)}    Completed: {completed_count}", font=("Arial", 12))
+    summary = ttk.Label(content_frame, text=f"Total Tasks: {len(homework_data)}    Completed: {completed_count}", font=("Arial", 12))
     summary.pack(pady=20)
 # ------
 def get_selected_index(tree): # finds home data inxex the selected task in the treeview widget
@@ -130,7 +130,7 @@ def show_homework():
     ## This function will show the homework paege shown as a table
     clear_content()
 
-    tk.Label(content_frame, text="Homework", font=("Arial", 20, "bold")).pack(pady=15)
+    ttk.Label(content_frame, text="Homework", font=("Arial", 20, "bold")).pack(pady=15)
     ## Homework page will be shown here using a treeview widget.
     tree = ttk.Treeview(content_frame, columns=("Subject", "Task", "Due Date", "Priority", "Status"), show="headings")
 
@@ -152,12 +152,12 @@ def show_homework():
 
     tree.pack(fill="both", expand=True, padx=20, pady=10)
 
-    button_row = tk.Frame(content_frame)
+    button_row = ttk.Frame(content_frame)
     button_row.pack(pady=10)
     #buttons for edit delete and toggle complete task
-    tk.Button(button_row, text="Edit", command=lambda: edit_selected_index(tree)).pack(side="left", padx=5)
-    tk.Button(button_row, text="Delete", command=lambda: delete_index(tree)).pack(side="left", padx=5)
-    tk.Button(button_row, text="Toggle Complete", command=lambda: complete_toggle(tree)).pack(side="left", padx=5)
+    ttk.Button(button_row, text="Edit", command=lambda: edit_selected_index(tree)).pack(side="left", padx=5)
+    ttk.Button(button_row, text="Delete", command=lambda: delete_index(tree)).pack(side="left", padx=5)
+    ttk.Button(button_row, text="Toggle Complete", command=lambda: complete_toggle(tree)).pack(side="left", padx=5)
 
 subject_box = None
 task_box = None
@@ -191,27 +191,27 @@ def show_add_task(edit_index=None):
     else:
         page_title = "Add Homework"
 
-    tk.Label(content_frame, text=page_title, font=("Arial", 20, "bold")).pack(pady=20)
+    ttk.Label(content_frame, text=page_title, font=("Arial", 20, "bold")).pack(pady=20)
 
-    form = tk.Frame(content_frame) # just a frame widget that placeholds the textboxes
+    form = ttk.Frame(content_frame) # just a frame widget that placeholds the textboxes
     form.pack()
 
-    tk.Label(form, text="Subject").grid(row=0, column=0, pady=5)
+    ttk.Label(form, text="Subject").grid(row=0, column=0, pady=5)
     subject_box = ttk.Combobox(form, values=["Maths", "English", "Science", "History", "PE", "Other"])
     subject_box.grid(row=0, column=1)
 
     # %P passes Tkinter the proposed new text so limit_length can check it
     vcmd = (root.register(limit_length), "%P")
 
-    tk.Label(form, text="task").grid(row=1, column=0, pady=5)
+    ttk.Label(form, text="task").grid(row=1, column=0, pady=5)
     task_box = tk.Entry(form, width=30, validate="key", validatecommand=vcmd)
     task_box.grid(row=1, column=1)
 
-    tk.Label(form, text="Due date").grid(row=2, column=0, pady=5)
+    ttk.Label(form, text="Due date").grid(row=2, column=0, pady=5)
     due_box = tk.Entry(form, width=30, validate="key", validatecommand=vcmd)
     due_box.grid(row=2, column=1)
 
-    tk.Label(form, text="Priority").grid(row=3, column=0, pady=5)
+    ttk.Label(form, text="Priority").grid(row=3, column=0, pady=5)
     priority_box = ttk.Combobox(form, values=["High", "Medium", "Low"])
     priority_box.grid(row=3, column=1)
 
@@ -227,7 +227,7 @@ def show_add_task(edit_index=None):
     else:
         button_text = "Save Homrwork"
 
-    tk.Button(content_frame, text=button_text, command=add_homework).pack(pady=20)
+    ttk.Button(content_frame, text=button_text, command=add_homework).pack(pady=20)
 
 
 # shows the statistics page (placeholder for now)
@@ -235,14 +235,14 @@ def show_statistics():
 
     clear_content()
 
-    tk.Label(content_frame, text="Statistics Page (Sprint 3)", font=("Arial", 18)).pack(pady=50)
+    ttk.Label(content_frame, text="Statistics Page (Sprint 3)", font=("Arial", 18)).pack(pady=50)
 
 # shows the help page (placeholder for now)
 def show_help():
 
     clear_content()
 
-    tk.Label(content_frame, text="Help Page", font=("Arial", 18)).pack(pady=50)
+    ttk.Label(content_frame, text="Help Page", font=("Arial", 18)).pack(pady=50)
 
 
 # Main Window (Everything below this line will run once when program start) --------------------
