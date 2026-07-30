@@ -230,13 +230,6 @@ def show_add_task(edit_index=None):
     ttk.Button(content_frame, text=button_text, command=add_homework).pack(pady=20)
 
 
-# shows the statistics page (placeholder for now)
-def show_statistics():
-
-    clear_content()
-
-    ttk.Label(content_frame, text="Statistics Page (Sprint 3)", font=("Arial", 18)).pack(pady=50)
-
 # shows the help page (placeholder for now)
 def show_help():
 
@@ -263,7 +256,7 @@ navbar = ttk.Frame(root) # The main navigation bar to navigate between pages.
 navbar.pack(fill="x")
 
 # Buttons labels in navigation bar
-buttons = [("Dashboard", show_dashboard), ("Homework", show_homework), ("Add Task", show_add_task), ("Statistics", show_statistics), ("Help", show_help), ("Exit", root.destroy)]
+buttons = [("Dashboard", show_dashboard), ("Homework", show_homework), ("Add Task", show_add_task), ("Help", show_help), ("Exit", root.destroy)]
 
 for text, command in buttons: 
 
