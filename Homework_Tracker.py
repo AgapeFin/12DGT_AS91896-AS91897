@@ -259,7 +259,7 @@ title = ttk.Label(header,text="HOMEWORK PLANNER", font=("Arial", 18, "bold")) #M
 
 title.pack(pady=10)
 
-navbar = ttk.Frame(root, bg="#FFFFFF") # The main navigation bar to navigate between pages.
+navbar = ttk.Frame(root) # The main navigation bar to navigate between pages.
 navbar.pack(fill="x")
 
 # Buttons labels in navigation bar
