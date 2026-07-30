@@ -237,7 +237,14 @@ def show_help():
 
     ttk.Label(content_frame, text="Help Page", font=("Arial", 20, "bold")).pack(pady=20)
 
-    help_text = ("Dashboard - shows some upcoming tasks and completed tasks\n\n")
+    help_text = ("Dashboard - shows some upcoming tasks and completed tasks, gives a quick summary\n\n"
+                 "Homework - shows every task in a table, colour-coded by status (blue if completed), by priority with high being purple, medium being pink, low as orange.\n\n"
+                 "Select a row and either:\n"
+                 "Edit: Reopens the form with the task's details prefilled\n"
+                 "Delete: removes the task (asks to confirm first)\n"
+                 "Toggle Complete: Switches the task between Complete and Incomplete\n\n"
+                 "Add Task - Fill in the form; Subject, Task, Due Date and Priority. Then, click Save Homework. All fields are REQUIRED. Task/Due Date have character limit (40).\n\n"
+                 "Exit - Closes app. Note: Tasks are saved automatically any time you add, edit, delete, or toggle. Data won't be lost.")
 
 
 # Main Window (Everything below this line will run once when program start) --------------------
