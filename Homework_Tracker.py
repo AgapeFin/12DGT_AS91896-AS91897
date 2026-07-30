@@ -246,20 +246,20 @@ def show_help():
 
 
 # Main Window (Everything below this line will run once when program start) --------------------
-root = tk.Tk()
+root = ThemedTk(theme="arc") # using arc as main theme
 root.title("Homework Planner")
 root.geometry("900x650")
 
 load_data() ## any saved data from before will be loaded here when program starts
 
-header = tk.Frame(root) # the main header at the top of window
+header = ttk.Frame(root) # the main header at the top of window
 header.pack(fill="x")
 
-title = tk.Label(header,text="HOMEWORK PLANNER", font=("Arial", 18, "bold")) #Main title of the app
+title = ttk.Label(header,text="HOMEWORK PLANNER", font=("Arial", 18, "bold")) #Main title of the app
 
 title.pack(pady=10)
 
-navbar = tk.Frame(root, bg="#FFFFFF") # The main navigation bar to navigate between pages.
+navbar = ttk.Frame(root, bg="#FFFFFF") # The main navigation bar to navigate between pages.
 navbar.pack(fill="x")
 
 # Buttons labels in navigation bar
@@ -267,9 +267,9 @@ buttons = [("Dashboard", show_dashboard), ("Homework", show_homework), ("Add Tas
 
 for text, command in buttons: 
 
-    tk.Button(navbar, text=text, command=command).pack(side="left", padx=5, pady=5)
+    ttk.Button(navbar, text=text, command=command).pack(side="left", padx=5, pady=5)
 
-content_frame = tk.Frame(root) ## the "content_frame" is the main page area so that the function clear_content() can remove
+content_frame = ttk.Frame(root) ## the "content_frame" is the main page area so that the function clear_content() can remove
 content_frame.pack(fill="both", expand=True)
 
 
