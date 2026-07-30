@@ -246,6 +246,8 @@ def show_help():
                  "Add Task - Fill in the form; Subject, Task, Due Date and Priority. Then, click Save Homework. All fields are REQUIRED. Task/Due Date have character limit (40).\n\n"
                  "Exit - Closes app. Note: Tasks are saved automatically any time you add, edit, delete, or toggle. Data won't be lost.")
 
+    ttk.Label(content_frame, text=help_text, font=("Arial", 12), justify="left", wraplength=700).pack(padx=30, pady=10, anchor="w")
+
 
 # Main Window (Everything below this line will run once when program start) --------------------
 root = ThemedTk(theme="arc") # using arc as main theme
