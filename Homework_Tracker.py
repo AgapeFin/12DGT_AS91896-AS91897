@@ -12,9 +12,9 @@ DATA_FILE = "homework.json"
 # this list keeps all the homework tasks (while the app is still on)
 homework_data = []
 
-COLOUR_PRIORITY = {"High": "#d000ff", "Medium": "#ff006f", "Low": "#ff8400"}
+COLOUR_PRIORITY = {"High": "#ff9100", "Medium": "#fbff00", "Low": "#00e1ff"}
 
-COLOUR_STATUS = {"Complete":"#5988FF", "Incomplete":"#FF0000"}
+COLOUR_STATUS = {"Complete":"#75FF59", "Incomplete":"#FF0000"}
 
 # stops a task/due date field from breaking the layout with huge input
 MAX_FIELD_LENGTH = 40
@@ -245,7 +245,7 @@ def show_help():
     ttk.Label(content_frame, text="Help Page", font=("Arial", 20, "bold")).pack(pady=20)
 
     help_text = ("Dashboard - shows some upcoming tasks and completed tasks, gives a quick summary\n\n"
-                 "Homework - shows every task in a table, colour-coded by status (blue if completed), by priority with high being purple, medium being pink, low as orange.\n\n"
+                 "Homework - shows every task in a table, colour-coded by status (green if completed, red if incomplete), by priority with high being orange, medium being yellow, low as blue.\n\n"
                  "Select a row and either:\n"
                  "Edit: Reopens the form with the task's details prefilled\n"
                  "Delete: removes the task (asks to confirm first)\n"
