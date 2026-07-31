@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from ttkthemes import ThemedTk
+from datetime import datetime
 import json
 import os
 
@@ -22,6 +23,13 @@ MAX_FIELD_LENGTH = 40
 def limit_length(new_value):
     ## Tkinter calls this on every keystroke; returning False blocks the edit
     return len(new_value) <= MAX_FIELD_LENGTH
+
+def is_valid_date(text):
+    try:
+        datetime.strptime(text, "%d%m%Y")
+        return True
+    except ValueError:
+        return False
 
 def load_data(): ## Loads saved homework tasks from the JSON file and puts in homework_data*
     global homework_data
