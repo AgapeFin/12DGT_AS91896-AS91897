@@ -32,11 +32,16 @@ def is_valid_date(text):
         return False
 
 def load_data(): ## Loads saved homework tasks from the JSON file and puts in homework_data
+                ## If the file is missing or empty, or corrupted, starts with an empty list.
+                ## instead of crashing, so one bad file can't break the whole app.
     global homework_data
-
     if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as file:
-            homework_data = json.load(file)
+        try:
+            with open(DATA_FILE, "r") as file:
+                homework_data = json.load(file)
+        except (json.JSONDecodeError, ValueError):
+            homework_data = []
+            messagebox.showwarning("Data Error", "Your saved homework file was empty or corrupted, so a new one will be created. Any previous data will be lost.")
 
 def save_data(): ## The homework_data from before is written so that tasks won't be lost after app closes
     with open(DATA_FILE, "w") as file:
