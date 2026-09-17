@@ -208,12 +208,12 @@ def show_add_task(edit_index=None):
     form = ttk.Frame(content_frame) # just a frame widget to hold the textboxes
     form.pack()
 
-    ttk.Label(form, text="Subject").grid(row=0, column=0, pady=5)
-    subject_box = ttk.Combobox(form, values=["Maths", "English", "Science", "History", "PE", "Other"])
-    subject_box.grid(row=0, column=1)
-
     # %P passes Tkinter the proposed new text so limit_length can check it
     vcmd = (root.register(limit_length), "%P")
+
+    ttk.Label(form, text="Subject").grid(row=0, column=0, pady=5)
+    subject_box = ttk.Combobox(form, values=["Maths", "English", "Science", "History", "PE", "Other"], validate="key", validatecommand=vcmd)
+    subject_box.grid(row=0, column=1)
 
     ttk.Label(form, text="Task").grid(row=1, column=0, pady=5)
     task_box = tk.Entry(form, width=30, validate="key", validatecommand=vcmd)
